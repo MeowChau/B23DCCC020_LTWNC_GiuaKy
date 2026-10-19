@@ -21,7 +21,7 @@ npm run build
 npm run preview
 ```
 
-npm test chạy 29 test Jest một lần rồi thoát. npm run test:watch bật chế độ theo dõi. npm run test:coverage xuất báo cáo vào coverage/.
+npm test chạy 33 test Jest một lần rồi thoát. npm run test:watch bật chế độ theo dõi. npm run test:coverage xuất báo cáo vào coverage/.
 
 ## Chức năng và quy ước
 
@@ -34,7 +34,19 @@ npm test chạy 29 test Jest một lần rồi thoát. npm run test:watch bật 
 - Theme sáng/tối mặc định theo hệ điều hành; lựa chọn thủ công lưu trong localStorage.
 - /stats hiển thị số đầu sách từng thể loại, số bản còn lại và số cuốn bạn đang mượn. Trang này được lazy load.
 - Mượn/trả được giữ khi chuyển route trong cùng phiên chạy. Tải lại toàn bộ trang bắt đầu lại dữ liệu mẫu và lượt mượn; theme vẫn được giữ.
-- Bìa là minh hoạ được dựng trong mã nguồn bằng CSS/SVG. Ứng dụng không cần dịch vụ ảnh, font hay backend bên ngoài.
+- Bìa mặc định là minh hoạ CSS/SVG. Mỗi sách có thể gán ảnh thật qua coverUrl; nếu để trống hoặc ảnh tải lỗi, app dùng lại bìa minh hoạ.
+
+## Gán ảnh bìa sách
+
+Mở src/api/booksData.ts, tìm sách cần sửa và dán link ảnh vào trường coverUrl đã có sẵn:
+
+```ts
+coverUrl: 'https://example.com/clean-code.jpg',
+```
+
+Dùng link trả trực tiếp nội dung ảnh. Ảnh tự hiển thị ở cả danh mục và kệ đang mượn. Để coverUrl là chuỗi rỗng nếu muốn dùng bìa minh hoạ; nếu link lỗi, app tự trở về bìa minh hoạ và sẽ thử ảnh mới khi bạn đổi link.
+
+Bạn cũng có thể đặt ảnh trong public/images/books/clean-code.jpg và gán coverUrl: '/images/books/clean-code.jpg'. Đường dẫn này không có tiền tố /public. Ảnh được giữ nguyên tỉ lệ, hỗ trợ cả bìa lớn và bìa nhỏ.
 
 ## Thử trường hợp API lỗi
 

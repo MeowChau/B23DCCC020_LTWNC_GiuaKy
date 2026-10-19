@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { BorrowedBook } from '../types';
 
 export function BookCover({
@@ -7,6 +8,25 @@ export function BookCover({
   book: BorrowedBook;
   small?: boolean;
 }) {
+  const coverUrl = book.coverUrl?.trim() ?? '';
+  const [failedCoverUrl, setFailedCoverUrl] = useState<string | null>(null);
+
+  if (coverUrl && coverUrl !== failedCoverUrl) {
+    return (
+      <img
+        key={coverUrl}
+        className={
+          'book-cover book-cover-image' + (small ? ' book-cover-small' : '')
+        }
+        src={coverUrl}
+        alt={'Bìa sách ' + book.title}
+        loading="lazy"
+        decoding="async"
+        onError={() => setFailedCoverUrl(coverUrl)}
+      />
+    );
+  }
+
   return (
     <div
       className={

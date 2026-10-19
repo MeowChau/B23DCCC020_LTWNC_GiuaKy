@@ -804,6 +804,12 @@ p {
   width: 1px;
   background: #ffffff18;
 }
+img.book-cover.book-cover-image {
+  display: block;
+  padding: 0;
+  background: var(--surface);
+  object-fit: contain;
+}
 .tone-navy {
   --cover-bg: #263e5a;
   --cover-ink: #f6ead4;

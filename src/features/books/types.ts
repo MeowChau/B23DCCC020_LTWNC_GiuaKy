@@ -11,11 +11,12 @@ export interface Book {
   availableCopies: number;
   totalCopies: number;
   coverTone: CoverTone;
+  coverUrl?: string;
 }
 
 export type BorrowedBook = Pick<
   Book,
-  'id' | 'title' | 'author' | 'category' | 'coverTone'
+  'id' | 'title' | 'author' | 'category' | 'coverTone' | 'coverUrl'
 >;
 export type CategoryCounts = Record<Category, number>;
 export type LoadingStatus = 'idle' | 'loading' | 'succeeded' | 'failed';
